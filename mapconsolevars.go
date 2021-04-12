@@ -16,7 +16,7 @@ const SEPARATOR string = "="
 // Le os argumentos repassados pela linha de comando de execução
 // do programa, tentando transformar os argumentos em um conjunto
 // de chave/valor que pode ser acessado pelo método GetArgsValue
-func readArgsConsole() {
+func initialize() {
 	mapArgs = make(map[string]string)
 	arrayArgs = os.Args
 	for _, arg := range arrayArgs {
@@ -25,6 +25,7 @@ func readArgsConsole() {
 			mapArgs[splitArg[0]] = splitArg[1]
 		}
 	}
+	initializated = true
 }
 
 // Retorna o valor especificado pela chave e se a chave existe ou não
@@ -35,10 +36,9 @@ func readArgsConsole() {
 //	if found {
 //		fmt.Println("O valor de chave1 é", valor1)
 //	}
-func GetArgsValue(key string) (interface{}, bool) {
+func GetValue(key string) (interface{}, bool) {
 	if !initializated {
-		readArgsConsole()
-		initializated = true
+		initialize()
 	}
 	value := mapArgs[key]
 	if value == "" {

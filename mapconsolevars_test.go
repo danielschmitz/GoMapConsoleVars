@@ -10,7 +10,7 @@ func onInit() {
 }
 func TestInexistetKey(t *testing.T) {
 	onInit()
-	_, found := GetArgsValue("ThisKeyShouldNotExixts")
+	_, found := GetValue("ThisKeyShouldNotExixts")
 	if found {
 		t.Errorf("Found a inexistent key")
 	}
@@ -18,7 +18,7 @@ func TestInexistetKey(t *testing.T) {
 
 func TestExistentKey(t *testing.T) {
 	onInit()
-	value1, found := GetArgsValue("key1")
+	value1, found := GetValue("key1")
 	if !found {
 		t.Errorf("Not found key 'key1', but its present at os.Args")
 	}
