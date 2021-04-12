@@ -1,19 +1,3 @@
-/*
-Lê os argumentos da inicialização do programa (console),
-criando um map chave/valor
-
-Exemplo:
-
-Ao chamar o programa: `go run *.go chave1=valor1 chave2=valor2`
-
-Quando precisar do valor de chave1, use `GetArgsValue("chave1")`
-
-	valor1, found := mapconsolevars.GetArgsValue("chave1")
-	if found {
-		fmt.Println("O valor de chave1 é", valor1)
-	}
-
-*/
 package mapconsolevars
 
 import (
@@ -23,6 +7,7 @@ import (
 
 var mapArgs map[string]string
 var arrayArgs []string
+var initializated bool = false
 
 // O separador para delimitar o conjunto chave/valor na linha de comandos
 // O padrão é =
@@ -31,9 +16,7 @@ const SEPARATOR string = "="
 // Le os argumentos repassados pela linha de comando de execução
 // do programa, tentando transformar os argumentos em um conjunto
 // de chave/valor que pode ser acessado pelo método GetArgsValue
-//
-// Deve ser chamado na inicialização do programa
-func ReadArgsConsole() {
+func readArgsConsole() {
 	mapArgs = make(map[string]string)
 	arrayArgs = os.Args
 	for _, arg := range arrayArgs {
@@ -45,7 +28,18 @@ func ReadArgsConsole() {
 }
 
 // Retorna o valor especificado pela chave e se a chave existe ou não
+//
+// Por exemplo:
+//
+// 	valor1, found := mapconsolevars.GetArgsValue("chave1")
+//	if found {
+//		fmt.Println("O valor de chave1 é", valor1)
+//	}
 func GetArgsValue(key string) (interface{}, bool) {
+	if !initializated {
+		readArgsConsole()
+		initializated = true
+	}
 	value := mapArgs[key]
 	if value == "" {
 		return "", false
