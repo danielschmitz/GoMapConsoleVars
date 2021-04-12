@@ -44,8 +44,7 @@ func ReadArgsConsole() {
 	}
 }
 
-// Retorna o valor especificado pela chave e
-//  se a chave existe ou não
+// Retorna o valor especificado pela chave e se a chave existe ou não
 func GetArgsValue(key string) (interface{}, bool) {
 	value := mapArgs[key]
 	if value == "" {
