@@ -1,3 +1,3 @@
-module github.com/danielschmitz/gomapconsolevars
+module github.com/danielschmitz/mapconsolevars
 
 go 1.16
