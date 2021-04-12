@@ -10,7 +10,7 @@ Passo 1: No main do programa, chamar ReadArgsConsole()
 Passo 2: Quando precisar do valor de chave1, use GetArgsValue("chave1")
 
 */
-package main
+package mapconsolevars
 
 import (
 	"os"
@@ -23,10 +23,6 @@ var arrayArgs []string
 // O separador para delimitar o conjunto chave/valor na linha de comandos
 // O padrão é =
 const SEPARATOR string = "="
-
-func main() {
-
-}
 
 // Le os argumentos repassados pela linha de comando de execução
 // do programa, tentando transformar os argumentos em um conjunto
