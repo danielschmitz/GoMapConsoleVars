@@ -24,6 +24,10 @@ var arrayArgs []string
 // O padrão é =
 const SEPARATOR string = "="
 
+func main() {
+
+}
+
 // Le os argumentos repassados pela linha de comando de execução
 // do programa, tentando transformar os argumentos em um conjunto
 // de chave/valor que pode ser acessado pelo método GetArgsValue
