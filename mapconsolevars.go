@@ -9,18 +9,16 @@ var mapArgs map[string]string
 var arrayArgs []string
 var initializated bool = false
 
-// O separador para delimitar o conjunto chave/valor na linha de comandos
-// O padrão é =
-const SEPARATOR string = "="
+// The character separator between key and value
+// default is =
+// key=value
+var separator string = "="
 
-// Le os argumentos repassados pela linha de comando de execução
-// do programa, tentando transformar os argumentos em um conjunto
-// de chave/valor que pode ser acessado pelo método GetArgsValue
 func initialize() {
 	mapArgs = make(map[string]string)
 	arrayArgs = os.Args
 	for _, arg := range arrayArgs {
-		splitArg := strings.Split(arg, SEPARATOR)
+		splitArg := strings.Split(arg, separator)
 		if len(splitArg) == 2 {
 			mapArgs[splitArg[0]] = splitArg[1]
 		}
@@ -28,13 +26,13 @@ func initialize() {
 	initializated = true
 }
 
-// Retorna o valor especificado pela chave e se a chave existe ou não
+// Get the value of a key
 //
-// Por exemplo:
+// Example: go run *.go key1=value1
 //
-// 	valor1, found := mapconsolevars.GetArgsValue("chave1")
+// 	value1, found := mapconsolevars.GetArgsValue("key1")
 //	if found {
-//		fmt.Println("O valor de chave1 é", valor1)
+//		fmt.Println("The value of key1 is", value1)
 //	}
 func GetValue(key string) (interface{}, bool) {
 	if !initializated {
@@ -45,4 +43,18 @@ func GetValue(key string) (interface{}, bool) {
 		return "", false
 	}
 	return value, true
+}
+
+// Change tha character separator. The default is "="
+//
+// Example: go run *.go key1:value1
+//
+//  mapconsolevars.ChangeSeparatorTo(":")
+// 	value1, found := mapconsolevars.GetArgsValue("key1")
+//	if found {
+//		fmt.Println("The value of key1 is", value1)
+//	}
+func ChangeSeparatorTo(newSeparator string) {
+	separator = newSeparator
+	initialize()
 }
