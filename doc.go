@@ -1,16 +1,31 @@
 /*
-Lê os argumentos da inicialização do programa (console),
-criando um map chave/valor
+Read Console Vars and save to a map
 
-Exemplo:
+Example:
 
-Ao chamar o programa: `go run *.go chave1=valor1 chave2=valor2`
+When you run
 
-Quando precisar do valor de chave1, use `GetArgsValue("chave1")`
+	go run *.go key1=value1 key2=value2
 
-	valor1, found := mapconsolevars.GetArgsValue("chave1")
+And need the value of a "key1":
+
+	value1, found := mapconsolevars.GetValue("key1")
 	if found {
-		fmt.Println("O valor de chave1 é", valor1)
+		fmt.Println("Value of key1 is", value1)
+	}
+
+You can change the delimiter character with mapconsolevars.ChangeSeparatorTo.
+
+Example:
+
+	go run *.go key1:value1 key2:value2
+
+And need the value of a "key1":
+
+	mapconsolevars.ChangeSeparatorTo(":")
+	value1, found := mapconsolevars.GetValue("key1")
+	if found {
+		fmt.Println("Value of key1 is", value1)
 	}
 
 */
