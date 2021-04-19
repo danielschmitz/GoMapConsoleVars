@@ -1,19 +1,14 @@
 package mapconsolevars
 
 import (
-	"os"
 	"testing"
 )
 
-func setArgsWithEqualCharacter() {
-	os.Args = append(os.Args, "key1=value1")
-}
-func setArgsWithDotCharacter() {
-	os.Args = append(os.Args, "key1:value1")
-}
+//
+//  need to run:  go test -args key1:value1 keyDots1=valueDots1
+//
 
 func TestInexistetKey(t *testing.T) {
-	setArgsWithEqualCharacter()
 	_, found := GetValue("ThisKeyShouldNotExixts")
 	if found {
 		t.Errorf("Found a inexistent key")
@@ -21,24 +16,23 @@ func TestInexistetKey(t *testing.T) {
 }
 
 func TestExistentKey(t *testing.T) {
-	setArgsWithEqualCharacter()
 	value1, found := GetValue("key1")
 	if !found {
-		t.Errorf("Not found key 'key1', but its present at os.Args")
+		t.Errorf("Not found key 'key1'. Did u run go test -args key1=value1 ?")
 	}
 	if value1 != "value1" {
-		t.Errorf("Found key 'key1', but value is diferent")
+		t.Errorf("Found key 'key1', but value is diferent. Did u run go test -args key1=value1 ?")
 	}
 }
 
 func TestExistentKeyWithDotSeparator(t *testing.T) {
-	setArgsWithDotCharacter()
 	ChangeSeparatorTo(":")
-	value1, found := GetValue("key1")
+	value1, found := GetValue("keyDots1")
 	if !found {
-		t.Errorf("Not found key 'key1', but its present at os.Args")
+		t.Errorf("Not found key 'key1'. Did u run go test -args keyDots1:valueDots1 ?")
+		return
 	}
-	if value1 != "value1" {
-		t.Errorf("Found key 'key1', but value is diferent")
+	if value1 != "valueDots1" {
+		t.Errorf("Found key 'keyDots1', but value is diferent. Did u run go test -args keyDots1:valueDots1 ?")
 	}
 }
